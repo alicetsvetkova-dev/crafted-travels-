@@ -1,0 +1,520 @@
+/* --- VARIABLES & RESET --- */
+:root {
+    --bg-color: #f9f8f6;
+    --text-color: #2c2c2c;
+    --accent-color: #e5987d;
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --nav-height: 70px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+}
+
+/* --- TYPOGRAPHY --- */
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 1.5rem;
+    letter-spacing: 0.2em;
+}
+
+/* --- STICKY NAVIGATION --- */
+.sticky-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: var(--nav-height);
+    background: rgba(249, 248, 246, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.nav-logo {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--text-color);
+    letter-spacing: 0.2em;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    margin-left: 2rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+/* --- SCROLL REVEAL ANIMATIONS --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--text-color);
+    background-image: url('../images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    padding-top: var(--nav-height);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(249, 248, 246, 0.6);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+}
+
+.logo-block {
+    background-color: var(--accent-color);
+    display: inline-block;
+    padding: 3rem;
+    margin-bottom: 2rem;
+}
+
+.logo-block h1 {
+    color: #fff;
+    font-size: 2.5rem;
+    line-height: 1.8;
+    letter-spacing: 0.4em;
+}
+
+.hero h2 {
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.hero .dates {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    margin-bottom: 3rem;
+    color: var(--text-color);
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    background-color: transparent;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--text-color);
+    color: #fff;
+}
+
+/* --- CONCEPT SECTION & IMAGES --- */
+.concept {
+    background-color: #fff;
+}
+
+.concept h3 {
+    font-size: 1.8rem;
+    line-height: 1.4;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.concept p {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem auto;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.highlights {
+    max-width: 800px;
+    margin: 0 auto 3rem auto;
+    list-style-type: none;
+}
+
+.highlights li {
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.image-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.image-gallery .img-wrapper img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+/* --- FULL WIDTH VISUAL BREAKS --- */
+.full-width-image {
+    width: 100%;
+    height: 60vh;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+}
+
+/* --- ABOUT SECTION --- */
+.about {
+    background-color: var(--bg-color);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.about-text p {
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+    color: #444;
+}
+
+.signature {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--accent-color);
+    margin-top: 2rem;
+}
+
+.about-image img {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    box-shadow: 10px 10px 0px var(--accent-color);
+}
+
+/* --- PROGRAM SECTION --- */
+.grid-program {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.day-card {
+    background: #fff;
+    padding: 2.5rem;
+    border-left: 3px solid var(--accent-color);
+    transition: box-shadow 0.3s ease;
+}
+
+.day-card:hover {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.card-img-wrapper {
+    margin-bottom: 1.5rem;
+}
+
+.card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.day-card h4 {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.disclaimer {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 3rem;
+}
+
+/* --- PRICING SECTION --- */
+.pricing {
+    background-color: #fff;
+}
+
+.inclusions {
+    max-width: 800px;
+    margin: 0 auto 3rem auto;
+    background-color: var(--bg-color);
+    padding: 2.5rem;
+    font-size: 0.95rem;
+}
+
+.inclusions p {
+    margin-bottom: 1rem;
+}
+
+.grid-pricing {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.price-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 3rem 2rem;
+    text-align: center;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--text-color);
+    display: block;
+}
+
+.price-card:hover {
+    background-color: var(--bg-color);
+    border-color: var(--accent-color);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.06);
+}
+
+.price-card h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    transition: color 0.4s ease;
+}
+
+.price-card .price {
+    font-size: 1.8rem;
+    font-weight: 400;
+    font-family: var(--font-heading);
+    margin-bottom: 1rem;
+}
+
+.price-card .note {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* --- PRICING TABLE --- */
+.pricing-table-container {
+    max-width: 800px;
+    margin: 0 auto 4rem auto;
+    overflow-x: auto;
+}
+
+.pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    font-size: 0.95rem;
+}
+
+.pricing-table th, .pricing-table td {
+    padding: 1.2rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.pricing-table th {
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--text-color);
+}
+
+.pricing-table td.check {
+    color: #27ae60;
+    font-weight: bold;
+    text-align: center;
+}
+
+.pricing-table td.cross {
+    color: #c0392b;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* --- FOOTER --- */
+footer {
+    background-color: var(--text-color);
+    color: #fff;
+    text-align: center;
+}
+
+footer h2 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+footer .contact-info {
+    margin-top: 2rem;
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+}
+
+/* --- EFFETS DE ZOOM AU SURVOL --- */
+.img-wrapper, .about-image, .day-card {
+    overflow: hidden;
+}
+
+.img-wrapper img, .about-image img, .day-card .card-img {
+    transition: transform 0.6s ease;
+}
+
+.img-wrapper:hover img, .about-image:hover img, .day-card:hover .card-img {
+    transform: scale(1.04);
+}
+
+/* ========================================= */
+/* --- RESPONSIVE DESIGN (MOBILE) ---        */
+/* ========================================= */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 4rem 1.5rem;
+    }
+    
+    /* Menu Navigation */
+    .sticky-nav {
+        height: auto;
+        padding: 10px 0;
+    }
+    .nav-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-left: 0;
+    }
+    .nav-links a {
+        margin: 0 10px 5px 10px;
+        font-size: 0.75rem;
+    }
+    
+    /* Hero Title Fix */
+    .logo-block {
+        padding: 1.5rem;
+        width: 100%;
+    }
+    .logo-block h1 {
+        font-size: 1.3rem;
+        letter-spacing: 0.2em;
+        white-space: nowrap;
+    }
+    
+    /* Sections Text & Layout */
+    .concept h3 {
+        font-size: 1.4rem;
+    }
+    .image-gallery, .about-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Image Adjustments */
+    .image-gallery .img-wrapper img {
+        height: 250px;
+    }
+    .about-image img {
+        height: 300px;
+    }
+    .full-width-image {
+        height: 40vh;
+        background-attachment: scroll; /* Désactive l'effet parallax sur mobile */
+    }
+
+    /* Pricing Table Fix */
+    .pricing-table th, .pricing-table td {
+        padding: 0.6rem 0.2rem;
+        font-size: 0.70rem;
+    }
+    .pricing-table th {
+        letter-spacing: 0;
+    }
+}

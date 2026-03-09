@@ -1,0 +1,42 @@
+document.addEventListener('DOMContentLoaded', () => {
+
+    // 1. Défilement doux compensé pour la barre de navigation fixe
+    const navHeight = document.querySelector('.sticky-nav').offsetHeight;
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // 2. Animations au défilement (Scroll Reveal)
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealOnScroll = () => {
+        const windowHeight = window.innerHeight;
+        const revealPoint = 100; // Déclenche l'animation 100px avant que l'élément n'entre dans l'écran
+
+        revealElements.forEach(el => {
+            const revealTop = el.getBoundingClientRect().top;
+            if (revealTop < windowHeight - revealPoint) {
+                el.classList.add('active');
+            }
+        });
+    };
+
+    // Déclencher une fois au chargement pour les éléments déjà visibles
+    revealOnScroll();
+
+    // Déclencher à chaque défilement
+    window.addEventListener('scroll', revealOnScroll);
+});
