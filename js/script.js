@@ -6,11 +6,22 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
+    
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
-
+    
             if (targetElement) {
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - -4;
+    
+                let targetPosition;
+    
+                if (window.innerWidth <= 768) {
+                    // mobile offset
+                    targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - 120;
+                } else {
+                    // EXACT original desktop behavior
+                    targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset + 4;
+                }
+    
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
