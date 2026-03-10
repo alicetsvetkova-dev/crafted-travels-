@@ -51,3 +51,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // Déclencher à chaque défilement
     window.addEventListener('scroll', revealOnScroll);
 });
+function toggleInfo(icon) {
+    const popup = icon.nextElementSibling;
+
+    document.querySelectorAll('.info-popup').forEach(p => {
+        if (p !== popup) {
+            p.classList.remove('active');
+        }
+    });
+
+    popup.classList.toggle('active');
+}
+
+document.addEventListener('click', function(e) {
+    if (!e.target.classList.contains('info-trigger')) {
+        document.querySelectorAll('.info-popup').forEach(p => {
+            p.classList.remove('active');
+        });
+    }
+});
