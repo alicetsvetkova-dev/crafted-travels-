@@ -530,21 +530,14 @@ footer .contact-info {
     transform: translateY(-6px);
 }
 
-.info-box {
-    display: inline-block;
+.info-cell {
     position: relative;
-    margin-left: 6px;
-    vertical-align: middle;
 }
 
 .info-trigger {
+    margin-left: 6px;
     cursor: pointer;
-    list-style: none;
     display: inline-block;
-}
-
-.info-trigger::-webkit-details-marker {
-    display: none;
 }
 
 .info-popup {
@@ -564,7 +557,7 @@ footer .contact-info {
     z-index: 999;
 }
 
-.info-box[open] .info-popup {
+.info-popup.show {
     display: block;
 }
 
