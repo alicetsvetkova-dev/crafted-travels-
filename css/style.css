@@ -530,17 +530,11 @@ footer .contact-info {
     transform: translateY(-6px);
 }
 
-.info-icon {
-    margin-left: 6px;
-    font-size: 0.8rem;
-    cursor: help;
-    opacity: 0.7;
-}
-
 .info-box {
     display: inline-block;
     position: relative;
     margin-left: 6px;
+    vertical-align: middle;
 }
 
 .info-trigger {
@@ -554,19 +548,30 @@ footer .contact-info {
 }
 
 .info-popup {
+    display: none;
     position: absolute;
-    left: 0;
-    top: 24px;
+    left: 50%;
+    top: calc(100% + 10px);
+    transform: translateX(-50%);
     background: white;
     border: 1px solid #ddd;
     padding: 14px;
     width: 260px;
+    max-width: 90vw;
     font-size: 0.85rem;
     line-height: 1.5;
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    z-index: 10;
+    z-index: 999;
 }
 
-.info-box:not([open]) .info-popup {
-    display: none;
+.info-box[open] .info-popup {
+    display: block;
+}
+
+.pricing-table-container {
+    overflow-x: visible;
+}
+
+.pricing-table td {
+    position: relative;
 }
