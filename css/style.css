@@ -535,4 +535,24 @@ footer .contact-info {
     cursor: help;
     opacity: 0.7;
 }
+.info-trigger {
+    margin-left: 6px;
+    cursor: pointer;
+}
 
+.info-popup {
+    display: none;
+    position: absolute;
+    background: white;
+    border: 1px solid #ddd;
+    padding: 14px;
+    width: 260px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    z-index: 10;
+}
+
+.info-trigger:hover + .info-popup {
+    display: block;
+}

@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
                 if (window.innerWidth <= 768) {
                     // mobile offset
-                    targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - 90;
+                    targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - 80;
                 } else {
                     // EXACT original desktop behavior
                     targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset + 4;
