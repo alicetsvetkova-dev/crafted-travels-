@@ -529,20 +529,34 @@ footer .contact-info {
 .price-card:hover {
     transform: translateY(-6px);
 }
+
 .info-icon {
     margin-left: 6px;
     font-size: 0.8rem;
     cursor: help;
     opacity: 0.7;
 }
-.info-trigger {
+
+.info-box {
+    display: inline-block;
+    position: relative;
     margin-left: 6px;
+}
+
+.info-trigger {
     cursor: pointer;
+    list-style: none;
+    display: inline-block;
+}
+
+.info-trigger::-webkit-details-marker {
+    display: none;
 }
 
 .info-popup {
-    display: none;
     position: absolute;
+    left: 0;
+    top: 24px;
     background: white;
     border: 1px solid #ddd;
     padding: 14px;
@@ -553,11 +567,6 @@ footer .contact-info {
     z-index: 10;
 }
 
-.info-trigger:hover + .info-popup {
-    display: block;
-}
-
-.info-popup.active {
-    display: block;
-
+.info-box:not([open]) .info-popup {
+    display: none;
 }
