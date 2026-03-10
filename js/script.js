@@ -51,3 +51,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Déclencher à chaque défilement
     window.addEventListener('scroll', revealOnScroll);
 });
+document.addEventListener('click', function (e) {
+    document.querySelectorAll('.info-box[open]').forEach(box => {
+        if (!box.contains(e.target)) {
+            box.removeAttribute('open');
+        }
+    });
+});
