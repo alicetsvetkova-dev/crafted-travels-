@@ -101,30 +101,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Info popup toggle logic
     document.querySelectorAll('.info-trigger').forEach(function (trigger) {
-        trigger.addEventListener('click', function (e) {
+        function handleTrigger(e) {
             e.stopPropagation();
+            e.preventDefault();
             const popup = trigger.nextElementSibling;
             const isOpen = popup.classList.contains('show');
 
-            // Close all popups first
             document.querySelectorAll('.info-popup.show').forEach(function (p) {
                 p.classList.remove('show');
             });
 
-            // Toggle the clicked one
             if (!isOpen) {
                 popup.classList.add('show');
                 repositionPopup(popup);
             }
-        });
+        }
+
+        trigger.addEventListener('click', handleTrigger);
+        trigger.addEventListener('touchend', handleTrigger);
     });
 
-    // Close popups on outside click
-    document.addEventListener('click', function () {
+   // Close popups on outside click
+   document.addEventListener('click', function () {
+    document.querySelectorAll('.info-popup.show').forEach(function (p) {
+        p.classList.remove('show');
+    });
+});
+
+// Close popups on outside TOUCH (mobile)
+document.addEventListener('touchend', function () {
+    setTimeout(function () {
         document.querySelectorAll('.info-popup.show').forEach(function (p) {
             p.classList.remove('show');
         });
-    });
+    }, 50);
+});
 
     // Prevent clicks inside popup from closing it
     document.querySelectorAll('.info-popup').forEach(function (popup) {
