@@ -556,3 +556,8 @@ footer .contact-info {
 .info-trigger:hover + .info-popup {
     display: block;
 }
+
+.info-popup.active {
+    display: block;
+
+}
