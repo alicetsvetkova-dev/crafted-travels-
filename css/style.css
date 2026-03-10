@@ -213,7 +213,7 @@ h1, h2, h3, h4 {
 
 .highlights li {
     padding: 1rem 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: none;
 }
 
 .image-gallery {
@@ -518,3 +518,21 @@ footer .contact-info {
         letter-spacing: 0;
     }
 }
+.pricing-cta {
+    text-align: center;
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 1rem;
+    margin: 0 0 2.5rem 0;
+}
+.price-card:hover {
+    transform: translateY(-6px);
+}
+.info-icon {
+    margin-left: 6px;
+    font-size: 0.8rem;
+    cursor: help;
+    opacity: 0.7;
+}
+

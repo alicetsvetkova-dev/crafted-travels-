@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetElement = document.querySelector(targetId);
 
             if (targetElement) {
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - -4;
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
