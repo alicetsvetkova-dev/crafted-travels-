@@ -626,6 +626,21 @@ footer .contact-info {
         font-size: 1.05rem;
         margin-bottom: 1.75rem;
     }
+
+    .grid-pricing {
+        grid-template-columns: 1fr;
+        padding: 0;
+    }
+
+    .price-card {
+        width: 100%;
+    }
+
+    .value-summary {
+        width: 100%;
+        padding: 0 1rem;
+        box-sizing: border-box;
+    }
 }
 .pricing-cta {
     text-align: center;
@@ -687,10 +702,9 @@ footer .contact-info {
 }
 
 #pricing {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    overflow-x: hidden;
 }
+
 .pricing-table-container {
     margin-bottom: 0;
 }
