@@ -276,7 +276,7 @@ h1, h2, h3, h4 {
 /* --- PROGRAM SECTION --- */
 .grid-program {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
     gap: 2rem;
 }
 
@@ -395,7 +395,7 @@ h1, h2, h3, h4 {
 
 .grid-pricing {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
     gap: 2rem;
     max-width: 1000px;
     margin: 0 auto;
@@ -626,21 +626,6 @@ footer .contact-info {
         font-size: 1.05rem;
         margin-bottom: 1.75rem;
     }
-
-    .grid-pricing {
-        grid-template-columns: 1fr;
-        padding: 0;
-    }
-
-    .price-card {
-        width: 100%;
-    }
-
-    .value-summary {
-        width: 100%;
-        padding: 0 1rem;
-        box-sizing: border-box;
-    }
 }
 .pricing-cta {
     text-align: center;
@@ -699,10 +684,6 @@ footer .contact-info {
     max-width: 520px;
     margin: 20px auto 0 auto;
     opacity: 0.8;
-}
-
-#pricing {
-    overflow-x: hidden;
 }
 
 .pricing-table-container {
