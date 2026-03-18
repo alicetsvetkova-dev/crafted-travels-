@@ -18,18 +18,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 2. Scroll reveal
+    // 2. Scroll reveal — using IntersectionObserver instead of scroll event
     const revealElements = document.querySelectorAll('.reveal');
-    const revealOnScroll = () => {
-        const windowHeight = window.innerHeight;
-        revealElements.forEach(el => {
-            if (el.getBoundingClientRect().top < windowHeight - 100) {
-                el.classList.add('active');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
             }
         });
-    };
-    revealOnScroll();
-    window.addEventListener('scroll', revealOnScroll);
+    }, { threshold: 0.1 });
+
+    revealElements.forEach(el => observer.observe(el));
 
     // 3. Info popups
     function closeAllPopups() {
