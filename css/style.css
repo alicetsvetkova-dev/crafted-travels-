@@ -14,7 +14,7 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
     font-family: var(--font-body);
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -576,6 +576,14 @@ footer .contact-info {
         max-width: 100%;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
+    }
+
+    /* Prevent tooltip popups from pushing viewport width */
+    .info-popup {
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(260px, calc(100vw - 3rem));
+        max-width: calc(100vw - 3rem);
     }
 
     .pricing-table th, .pricing-table td {
