@@ -347,6 +347,7 @@ h1, h2, h3, h4 {
     line-height: 1.6;
     margin-bottom: 28px;
     color: var(--text-color);
+    overflow-wrap: anywhere;
 }
 
 .value-summary__block {
@@ -367,6 +368,7 @@ h1, h2, h3, h4 {
     font-size: 1rem;
     color: var(--text-color);
     font-weight: 400;
+    overflow-wrap: anywhere;
 }
 
 .section-title--subtle {
@@ -570,6 +572,12 @@ footer .contact-info {
     }
 
     /* Pricing Table Fix */
+    .pricing-table-container {
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
     .pricing-table th, .pricing-table td {
         padding: 0.6rem 0.2rem;
         font-size: 0.70rem;
@@ -655,7 +663,7 @@ footer .contact-info {
 }
 
 .pricing-table-container {
-    overflow-x: visible;
+    overflow-x: auto;
 }
 
 .pricing-table td {
