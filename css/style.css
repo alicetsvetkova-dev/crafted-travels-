@@ -704,3 +704,8 @@ footer .contact-info {
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
 }
+.reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+}
