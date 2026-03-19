@@ -709,3 +709,7 @@ footer .contact-info {
     transform: none;
     transition: none;
 }
+a[href^="tel"] {
+    color: white;
+    text-decoration: none;
+}
