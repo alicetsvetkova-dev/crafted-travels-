@@ -3,18 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRAFTED VISIONS TRAVEL | Creative Artisan Weekend</title>
+    <title>CRAFTED VISIONS TRAVEL | Creative Artisan Experience</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="images/opt/hero-bg.webp" fetchpriority="high">
     <meta property="og:title" content="CRAFTED VISIONS TRAVEL | Creative Artisan Weekend">
-    <meta property="og:description" content="A creative weekend designed to help you slow down and step inside living craftsmanship in Tunis, connecting directly with master artisans.">
+    <meta property="og:description" content="An intimate creative experience in Tunis, connecting you directly with master artisans.">
     <meta property="og:image" content="https://craftedvisionstravel.com/images/opt/hero-bg.webp">
     <meta property="og:url" content="https://craftedvisionstravel.com/">
     <meta property="og:type" content="website">
-   
+    <style>
+        /* Concept section: tighten spacing around wave dividers + before collage */
+        .concept .container { padding-bottom: 2rem; }
+        .highlights { margin-bottom: 0 !important; }
+        .highlights li { padding: 0.35rem 0; }
+        .highlights li.divider { padding: 0.15rem 0; }
+
+        /* Collage strip */
+        .collage-strip {
+            width: 100%;
+            height: 50vh;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 4px;
+            overflow: hidden;
+        }
+        .collage-strip > div { overflow: hidden; }
+        .collage-strip img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: center center;
+            display: block;
+            transform: scale(1.0);
+            transition: transform 0.7s ease;
+        }
+        .collage-strip > div:hover img { transform: scale(1.03); }
+
+        /* Tighten About -> Program gap */
+        .about .container { padding-bottom: 3rem; }
+        .program .container { padding-top: 3rem; }
+
+        /* Fix nav overlap on anchor scroll for all sections */
+        section[id], header[id], footer[id] {
+            scroll-margin-top: calc(var(--nav-height) + 1rem);
+        }
+
+        /* Program layout: cards + checklist side by side */
+        .program-inner {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 4rem;
+            align-items: start;
+        }
+        .program-checklist {
+            position: sticky;
+            top: calc(var(--nav-height) + 2rem);
+        }
+        .program-checklist__title {
+            font-family: var(--font-heading);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 1.5rem;
+        }
+        .program-checklist ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem 0;
+        }
+        .program-checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+            color: #444;
+            line-height: 1.5;
+            padding: 0.55rem 0;
+            border-bottom: 1px solid #f0ede9;
+        }
+        .program-checklist li:last-child { border-bottom: none; }
+        .program-checklist li::before {
+            content: "✓";
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            margin-top: 0.05rem;
+        }
+        @media (max-width: 900px) {
+            .program-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+            .program-checklist { position: static; }
+        }
+
+        /* Program cards: uniform description alignment */
+        .day-card__time {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+        .day-card__workshop {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        .day-card__desc {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Photo grid for stories */
+        .photo-grid-stories {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-rows: 240px 240px;
+            gap: 8px;
+            margin-bottom: 3rem;
+        }
+        .photo-grid-stories > div { overflow: hidden; }
+        .photo-grid-stories > div:first-child { grid-row: span 2; }
+        .photo-grid-stories img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: center center;
+            display: block;
+            transform: scale(1.0);
+            transition: transform 0.6s ease;
+        }
+        .photo-grid-stories > div:hover img { transform: scale(1.03); }
+        .photo-grid-stories > div:nth-child(3) img { object-position: center 40%; }
+
+        /* Tighten Stories -> Pricing gap */
+        #stories .container { padding-bottom: 3rem; }
+        .pricing .container { padding-top: 3rem; }
+
+        /* Booking price cards — fixed row heights for perfect alignment */
+        .booking-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 700px;
+            margin: 0 auto 3rem auto;
+        }
+        .booking-card {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-color);
+            display: grid;
+            grid-template-rows: 2.5rem auto auto auto;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .booking-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.07);
+        }
+        .booking-card__label {
+            font-family: var(--font-heading);
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #aaa;
+            align-self: center;
+        }
+        .booking-card__title {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.75rem 0 0.5rem;
+        }
+        .booking-card__price {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 400;
+            padding: 0.75rem 0;
+        }
+        .booking-card__note {
+            font-size: 0.78rem;
+            color: #888;
+            line-height: 1.5;
+            padding-top: 0.5rem;
+        }
+        .booking-card--featured { border-color: var(--text-color); }
+        .booking-card--community { border-style: dashed; background: var(--bg-color); }
+
+        /* Newsletter */
+        .newsletter-section { background-color: var(--text-color); padding: 0; }
+        .newsletter-section .container {
+            text-align: center;
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+        footer .container {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        .newsletter-form {
+            display: flex;
+            max-width: 460px;
+            margin: 0 auto 1rem auto;
+        }
+        .newsletter-form input {
+            flex: 1;
+            padding: 14px 20px;
+            border: 1px solid #444;
+            background: #2a2a2a;
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+            font-family: var(--font-body);
+        }
+        .newsletter-form input::placeholder { color: #666; }
+        .newsletter-form button {
+            padding: 14px 24px;
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .newsletter-form button:hover { opacity: 0.85; }
+
+        @media (max-width: 700px) {
+            .collage-strip {
+                grid-template-columns: 1fr 1fr;
+                height: 35vh;
+            }
+            .collage-strip > div:nth-child(3),
+            .collage-strip > div:nth-child(4) { display: none; }
+            .photo-grid-stories {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 160px 160px 160px;
+            }
+            .photo-grid-stories > div:first-child { grid-row: auto; }
+            .newsletter-form { flex-direction: column; }
+            .booking-options { grid-template-columns: 1fr; max-width: 360px; }
+        }
+    </style>
 </head>
 <body>
 
@@ -25,6 +262,7 @@
                 <a href="#concept">Concept</a>
                 <a href="#about">About</a>
                 <a href="#program">Program</a>
+                <a href="#stories">Stories</a>
                 <a href="#pricing">Pricing</a>
                 <a href="#contact">Contact</a>
             </div>
@@ -36,41 +274,44 @@
             <div class="logo-block">
                 <h1>C R A F T E D<br>V I S I O N S</h1>
             </div>
-            <h2>CREATIVE ARTISAN WEEKEND</h2>
-            <p class="dates" style="margin-bottom:0;">26.-29.03.2026</p>
-            <p class="dates">Limited to 6 participants</p>
+            <h2>CREATIVE ARTISAN EXPERIENCE</h2>
+            <p class="dates" style="margin-bottom:0;">13-17 May 2026, Tunis</p>
+            <p class="dates">Limited spots available</p>
             <a href="#pricing" class="btn" style="margin-bottom:1.5rem;">Book now</a>
-            <p class="dates">Only 3 spots left</p>
         </div>
     </header>
 
     <section class="concept" id="concept">
         <div class="container reveal">
             <h3>Experience Tunisia through the hands of its artisans</h3>
-            <p>A 4-day creative experience in Tunis, designed to help you slow down and step inside living craftsmanship. While most travelers see souvenir shops and typical tourist spots, we open doors to something far more intimate.</p>
+            <p>An intimate creative experience in Tunis, designed to help you slow down and step inside living craftsmanship. While most travelers see souvenir shops and typical tourist spots, we open doors to something far more intimate.</p>
             <ul class="highlights" style="text-align:center; list-style:none; padding:0;">
                 <li class="divider">〰️</li>
-                <li>Learn craft skills through hands-on practice</li>
-                <li>Express your creativity alongside authentic local artisans</li>
-                <li>Build meaningful connections within a creative community</li>
+                <li>Leave with something you made with your own hands</li>
+                <li>Step inside a working atelier, not a tourist attraction</li>
+                <li>Join a small group - never more than 6 people</li>
                 <li class="divider">〰️</li>
-        
             </ul>
         </div>
     </section>
 
-    <section class="full-width-image reveal" style="background-image: url('images/opt/sahara-landscape.webp');">
-        </section>
+    <!-- COLLAGE from workshop photos -->
+    <div class="collage-strip">
+        <div><img src="images/collage_1.jpeg" alt="Ceramics workshop" loading="lazy"></div>
+        <div><img src="images/collage_2.jpeg" alt="Weaving workshop" loading="lazy"></div>
+        <div><img src="images/collage_3.PNG" alt="Calligraphy workshop" loading="lazy"></div>
+        <div><img src="images/collage_4.jpg" alt="Bookbinding workshop" loading="lazy"></div>
+    </div>
 
     <section class="about" id="about">
         <div class="container reveal about-grid">
             <div class="about-text">
                 <h2 class="section-title" style="text-align: left;">THE VISION BEHIND</h2>
-                <p>Hey there! We’re Alice and Janina. Craft is the thread connecting what we do. </p>
-                <p>Since 2018, Janina has hosted more than 20 macramé and creative workshops across Germany, Belgium and Spain, bringing people together through their hands and imagination.</p>
-                <p>Alice has built direct relationships with more than 60 independent artisans across the Maghreb, helping preserve traditional crafts through her brand <a href="https://faridique.com" target="_blank" rel="noopener">Faridique</a>.</p>                <p>This project was born during a slow afternoon near the Sahara desert over a mint tea with one simple question: what if people could experience craftsmanship at its source - real atelier handwork, side by side with artisans.</p>
-                <p>So we created exactly that: <strong>The Creative Artisan Weekend</strong>. An intimate 4-day experience in Tunis, where you can learn directly from master artisans. Come and join us!</p>
-                <p class="signature">— Alice & Janina</p>
+                <p>Hey there! We're Alice and Janina - craft is at the heart of what we do.</p>
+                <p>Since 2018, Janina has hosted 20+ creative workshops across Europe, bringing people together through hands-on making. Alice has built relationships with 60+ artisans across the Maghreb through her brand <a href="https://faridique.com" target="_blank" rel="noopener">Faridique</a>.</p>
+                <p>This project was born from a simple idea: what if people could experience craftsmanship at its source - working side by side with artisans?</p>
+                <p>So we created exactly that: <strong>The Creative Artisan Experience</strong> - an intimate series of workshops in Tunis led by master artisans. Join us.</p>
+                <p class="signature">- Alice &amp; Janina</p>
             </div>
             <div class="about-image">
                 <img src="images/opt/alice-founder.webp" alt="Alice Tsvetkova - Founder" loading="lazy" decoding="async">
@@ -78,196 +319,179 @@
         </div>
     </section>
 
+    <!-- PROGRAM -->
     <section class="program" id="program">
         <div class="container reveal">
             <h2 class="section-title">THE PROGRAM</h2>
             <p class="disclaimer"><strong>Workshop language: French</strong><br>Small adjustments to the schedule may occur to ensure the best possible experience for everyone.</p>
-            
+
+            <div class="program-inner">
+                <div class="grid-program">
+                    <div class="day-card">
+                        <img src="images/opt/atelier-poterie.webp" alt="Ceramics Workshop" class="card-img" loading="lazy" decoding="async">
+                        <h4>Wednesday - 13.05.</h4>
+                        <p class="day-card__time">14:00 - 18:00</p>
+                        <p class="day-card__workshop">Ceramics Workshop</p>
+                        <p class="day-card__desc">Shape clay with your hands and bring home a piece you made yourself, guided by a master ceramicist.</p>
+                    </div>
+                    <div class="day-card">
+                        <img src="images/calligraphy.webp" alt="Calligraphy Workshop" class="card-img" loading="lazy" decoding="async">
+                        <h4>Friday - 15.05.</h4>
+                        <p class="day-card__time">10:00 - 13:00</p>
+                        <p class="day-card__workshop">Calligraphy Workshop</p>
+                        <p class="day-card__desc">Discover the meditative rhythm of Arabic calligraphy in a beautiful creative space, followed by a walk through Sidi Bou Said.</p>
+                    </div>
+                    <div class="day-card">
+                        <img src="images/book-binding.webp" alt="Bookbinding and Medina Tour" class="card-img" loading="lazy" decoding="async">
+                        <h4>Saturday - 16.05.</h4>
+                        <p class="day-card__time">10:00 - 13:00</p>
+                        <p class="day-card__workshop">Bookbinding Workshop</p>
+                        <p class="day-card__desc">Learn the ancient art of hand-binding from one of the last bookbinders in Tunis. Leave with a book you made yourself.</p>
+                        <br>
+                        <p class="day-card__time">15:00 - 16:30</p>
+                        <p class="day-card__workshop">Guided Medina Tour</p>
+                        <p class="day-card__desc">Explore the Medina through the eyes of someone who truly knows it - hidden corners, living craftsmanship, stories off the tourist trail.</p>
+                    </div>
+                    <div class="day-card">
+                        <img src="images/opt/atelier-poterie.webp" alt="Ceramics Workshop" class="card-img" loading="lazy" decoding="async">
+                        <h4>Sunday - 17.05.</h4>
+                        <p class="day-card__time">14:00 - 18:00</p>
+                        <p class="day-card__workshop">Ceramics Workshop</p>
+                        <p class="day-card__desc">A second session for those who missed Wednesday - or who simply want to get their hands in clay one more time.</p>
+                    </div>
+                </div>
+
+                <aside class="program-checklist">
+                    <p class="program-checklist__title">What's included</p>
+                    <ul>
+                        <li>All levels welcome - no experience needed</li>
+                        <li>Small group - max 6 participants</li>
+                        <li>Take home your own creation</li>
+                        <li>Materials, snacks and drinks included</li>
+                        <li>Selected ateliers in Tunis - meeting point shared upon booking</li>
+                        <li>Secure booking - confirmation within 24h</li>
+                        <li>Limited spots per session</li>
+                    </ul>
+                    <p style="font-family:var(--font-heading); font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-color); text-align:center; margin-bottom:1rem;">Price per activity &nbsp;·&nbsp; <span style="color:var(--accent-color);">49 €</span></p>
+                    <a href="#pricing" class="btn" style="display:inline-block; width:100%; text-align:center; box-sizing:border-box;">Book now</a>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <section class="full-width-image reveal" style="background-image: url('images/opt/authentic-details.webp');"></section>
+
+    <!-- STORIES -->
+    <section class="concept" id="stories">
+        <div class="container reveal">
+            <h2 class="section-title">FROM OUR MARCH EDITION</h2>
+            <p class="disclaimer">A first glimpse of what participants experienced during our first workshops.</p>
+
+            <div class="photo-grid-stories">
+                <div><img src="images/pg_1.jpg" alt="Workshop participant" loading="lazy"></div>
+                <div><img src="images/pg_2.jpeg" alt="Bookbinding session" loading="lazy"></div>
+                <div><img src="images/pg_3.jpeg" alt="Calligraphy session" loading="lazy"></div>
+                <div><img src="images/pg_4.jpeg" alt="Medina tour" loading="lazy"></div>
+                <div><img src="images/pg_5.jpg" alt="Group photo" loading="lazy"></div>
+            </div>
+
             <div class="grid-program">
-                <div class="day-card">
-                    <img src="images/opt/atelier-poterie.webp" alt="Pottery Workshop" class="card-img" loading="lazy" decoding="async">
-                    <h4>Day 1 | 26.03.</h4>
-                    <p><strong>14:00 - 19:00:</strong> 
-                        <br>
-                        <strong>Welcome Dinner</strong> in a creative atmosphere in an authentic Tunisian Artist Studio.</p>
-                    <br>
-                    <p><strong>Workshop:</strong> Dinner & Pottery Workshop with Samia Achour Ben Ayoub.</p>
+                <div class="day-card" style="border-left-color:var(--accent-color);">
+                    <p style="font-style:italic; font-size:0.95rem; line-height:1.75; color:#444; margin-bottom:1.5rem;">"I came not knowing what to expect and left with a handmade book, a piece of pottery, and a completely different relationship with slowness. This is not a tour - it's an experience."</p>
+                    <p style="font-family:var(--font-heading); font-size:0.72rem; letter-spacing:0.12em; color:#aaa; text-transform:uppercase;">- Youssef, Tunisia</p>
                 </div>
-                <div class="day-card">
-                    <img src="images/opt/atelier-tissage.webp" alt="Weaving workshop details" class="card-img" loading="lazy" decoding="async">
-                    <h4>Day 2 | 27.03.</h4>
-                    <p><strong>09:30 - 13:00:</strong>
-                        <br>
-                         <strong>JojoDeco</strong>. Weaving workshop in the boutique of artisan Jihene.</p>
-                     
-                    <br>
-                    <p><strong>14:00 - 18:00:</strong> 
-                        <br>
-                        <strong>SALON DE LA CRÉATION ARTISANALE 2026</strong>. Visit the biggest Artisan Fair Trade in the country and get introduced to selected artisans.</p>
+                <div class="day-card" style="border-left-color:var(--accent-color);">
+                    <p style="font-style:italic; font-size:0.95rem; line-height:1.75; color:#444; margin-bottom:1.5rem;">"Alice and Janina created something rare: an intimate space where you genuinely connect with local artisans and with the other participants. I'll be back."</p>
+                    <p style="font-family:var(--font-heading); font-size:0.72rem; letter-spacing:0.12em; color:#aaa; text-transform:uppercase;">- Emma, Germany</p>
                 </div>
-                <div class="day-card">
-                    <img src="images/book-binding.webp" alt="Medina Tour" class="card-img" loading="lazy" decoding="async">                    <h4>Day 3 | 28.03.</h4>
-                    <p><strong>09:30 - 12:00:</strong> 
-                        <br>
-                        <strong>L'Artisanerie</strong>. Bookbinding Workshop with Mohammed, one of the last bookbinders in Tunis.</p>
-                    <br>
-                    <p><strong>14:00 - 16:00:</strong> 
-                        <br>
-                        <strong>Medina Guided Tour</strong> by Yassine. Exploring the Medina from another point of view.</p>
-                </div>
-                <div class="day-card">
-                    <img src="images/calligraphy.webp" alt="Basket Weaving" class="card-img" loading="lazy" decoding="async">
-                    <h4>Day 4 | 29.03.</h4>
-                    <p><strong>09:00 - 12:00:</strong> 
-                        <br>
-                        <p><strong>Ô L'Espace Créatif</strong>. Calligraphy Workshop in artistic location and a coffee and a walk through the beautiful quarter Sidi Bou.</p>
-                     
+                <div class="day-card" style="border-left-color:var(--accent-color);">
+                    <p style="font-style:italic; font-size:0.95rem; line-height:1.75; color:#444; margin-bottom:1.5rem;">"I joined the Arabic calligraphy session in Tunis with Mr. Tarek recently, and it was such a beautiful experience. This little workshop slowed me down and made me appreciate the beauty of taking my time and enjoying art - I left feeling lighter, inspired, and really grateful."</p>
+                    <p style="font-family:var(--font-heading); font-size:0.72rem; letter-spacing:0.12em; color:#aaa; text-transform:uppercase;">- Hashi, Syria</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="full-width-image reveal" style="background-image: url('images/opt/authentic-details.webp');">
-        </section>
-
+    <!-- PRICING -->
     <section class="pricing" id="pricing">
         <div class="container reveal">
-            <div class="value-summary" role="region" aria-label="What makes this experience different">
-            <h3 class="value-summary__title">What makes this experience different</h3>
-                <p class="value-summary__lead"><strong>4 days</strong> of insider access most travelers never get</p>
+            <h2 class="section-title">YOUR EXPERIENCE AWAITS</h2>
+            <p class="disclaimer">Choose what speaks to you &amp; check availability.<br>Every booking includes our <strong>Tunis Essentials Guide</strong> with favourite restaurants, cafes and local tips.</p>
 
-                <div class="value-summary__block">
-                    <p class="value-summary__line"><strong>10+</strong> hours creating with your own hands</p>
-                    <p class="value-summary__line">Work across <strong>4 traditional craft</strong> practices</p>
-                </div>
-
-                <div class="value-summary__block">
-                    <p class="value-summary__line">Create pieces you <strong>take home</strong></p>
-                    <p class="value-summary__line">Learn directly from <strong>local artisans</strong></p>
-                </div>
-
-                <div class="value-summary__block">
-                    <p class="value-summary__line">A <strong>small, curated group</strong> - far from mass tourism</p>
-                </div>
-            </div>
-
-            <h2 class="section-title section-title--subtle">PACKAGE DETAILS</h2>
-            
-            <div class="pricing-table-container">
-                <table class="pricing-table">
-                    <thead>
-                        <tr>
-                            <th>Activity</th>
-                            <th>Included</th>
-                        
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Dinner & Pottery Workshop</td>
-                            <td class="check">✓</td>
-                           
-                        </tr>
-                        <tr>
-                            <td>Weaving Workshop</td>
-                            <td class="check">✓</td>
-                           
-                        </tr>
-                        <tr>
-                            <td>Artisan Fair Entry</td>
-                            <td class="check">✓</td>
-                           
-                        </tr>
-                        <tr>
-                            <td>Bookbinding Workshop</td>
-                            <td class="check">✓</td>
-                           
-                        </tr>
-                        <tr>
-                            <td>Guided Walk in the Medina</td>
-                            <td class="check">✓</td>
-                            
-                        </tr>
-                        <tr>
-                            <td>Basket Workshop</td>
-                            <td class="check">✓</td>
-                           
-                        </tr>
-                        <tr>
-                            <td class="info-cell">
-                                Tunis Essentials Guide
-                                <span class="info-trigger">ⓘ</span>
-                                <div class="info-popup">
-                                    <strong>Food & local recommendations</strong><br>
-                                    Workshop participants receive a welcome guide with our favourite <strong>restaurants, bars, and cafés</strong>, plus a few helpful <strong>local tips and do’s & don’ts</strong> for your stay in Tunis.
-                                </div>
-                            </td>
-                            <td class="check">✓</td>
-                         
-                        </tr>
-                      
-                    </tbody>
-                </table>
-            </div>
-            <h3 style="text-align:center; letter-spacing:0.18em; text-transform:uppercase; margin-top:60px; margin-bottom:10px;">Choose your package</h3>            <p style="text-align:center; font-size:0.8rem; color:#888; font-family: var(--font-heading); letter-spacing:0.05em; margin-bottom:20px;">Only 3 spots left — starting March 26!</p>
-            <br>
-            <div class="grid-pricing">
-                <a href="https://buy.stripe.com/9B6bJ32OAgB4e0U9MM53O00" target="_blank" class="price-card">
-                   
-                    <h3>COMMUNITY</h3>
-                    <p class="price">145 € / 490 tnd</p>
-                    <p class="note">*For Tunisians who live and work in Tunisia</p>
+            <p style="text-align:center; font-family:var(--font-heading); font-size:0.8rem; letter-spacing:0.18em; text-transform:uppercase; margin-top:3rem; margin-bottom:3rem; color:var(--accent-color);">
+                <strong>
+                    Only 6 spots per session<br>
+                    Book now
+                </strong>
+            </p>
+            <!--
+                HOW BOOKING WORKS:
+                Two Stripe links cover all workshops:
+                - Standard (49€): one Stripe checkout with a dropdown to select the workshop
+                - Community (39€): same setup, separate link for Tunisians living & working in Tunisia
+                Replace STRIPE_STANDARD_LINK and STRIPE_COMMUNITY_LINK below with your actual Stripe URLs.
+                In Stripe, set up a Payment Link with a "Select workshop" dropdown as a custom field.
+            -->
+            <div class="booking-options">
+                <a href="STRIPE_STANDARD_LINK" target="_blank" class="booking-card booking-card--featured">
+                    <p class="booking-card__label">&nbsp;</p>
+                    <p class="booking-card__title">Standard</p>
+                    <p class="booking-card__price">49 €</p>
+                    <p class="booking-card__note">Choose your workshop after clicking.</p>
                 </a>
-                    <a href="https://buy.stripe.com/aFa14p9cYckO5uoe3253O01" target="_blank" class="price-card">
-                  
-                    <h3>STANDARD</h3>
-                    <p class="price">249 €</p>
-                </a>
-
-                <a href="https://buy.stripe.com/8x200l4WI0C66ysf7653O02" target="_blank" class="price-card">
-                    <h3>SUPPORTER</h3>
-                    <p class="price">289 €</p>
-                    <p class="note">**Your contribution funds a local participant's place</p>
+                <a href="STRIPE_COMMUNITY_LINK" target="_blank" class="booking-card booking-card--community">
+                    <p class="booking-card__label">For Tunisians living and working in Tunisia</p>
+                    <p class="booking-card__title">Community</p>
+                    <p class="booking-card__price">39 €</p>
+                    <p class="booking-card__note">Choose your workshop after clicking.</p>
                 </a>
             </div>
 
-            <div style="padding: 60px 0 20px; text-align: center;">
-                <p style="margin-bottom: 40px; color: #666; font-size: 14px;">
-                    After booking, we share accommodation options, transport tips, and local recommendations - everything is easy to organize.
+            <div style="padding:40px 0 20px; text-align:center;">
+                <p style="margin-bottom:40px; color:#666; font-size:14px;">After booking, you receive all location details and direct support if you need it.
+
                 </p>
-                <p style="margin-bottom: 24px; color: #444; font-size: 15px; font-weight: 600;">
-                    Not sure yet?
-                </p>
-                <a href="https://wa.me/+4915238418305" target="_blank" style="
-                    display: inline-block;
-                    background-color: #25D366;
-                    color: white;
-                    padding: 16px 32px;
-                    border-radius: 50px;
-                    font-size: 14px;
-                    font-weight: bold;
-                    text-decoration: none;">
+                <p style="margin-bottom:24px; color:#444; font-size:15px; font-weight:600;">Not sure yet?</p>
+                <a href="https://wa.me/+4915238418305" target="_blank" style="display:inline-block; background-color:#25D366; color:white; padding:16px 32px; border-radius:50px; font-size:14px; font-weight:bold; text-decoration:none;">
                     💬 Message us on WhatsApp
                 </a>
             </div>
+        </div>
+    </section>
 
+    <!-- NEWSLETTER -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container reveal">
+            <h2 style="color:var(--accent-color); margin-bottom:1rem; font-family:var(--font-heading); letter-spacing:0.2em;">STAY IN THE LOOP</h2>
+            <p style="color:#aaa; font-size:0.9rem; max-width:480px; margin:0 auto 2.5rem auto;">Be the first to hear about new workshops - spots are limited</p>
+            <!-- Replace with your Mailchimp form action URL -->
+            <div class="newsletter-form">
+                <input type="email" id="nl-email" placeholder="Your email address">
+                <button onclick="handleNL()">Sign up</button>
+            </div>
+            <p style="color:#555; font-size:0.75rem;">We respect your privacy. Unsubscribe anytime.</p>
         </div>
     </section>
 
     <footer id="contact">
         <div class="container reveal">
             <h2>CONTACT DETAILS</h2>
-            
             <p>Still have questions? We'd love to hear from you.</p>
             <div class="contact-info">
-                <p><strong>Instagram:</strong> <a href="https://www.instagram.com/crafted.visions.travel/" target="_blank" rel="noopener noreferrer" style="color: white;">@crafted.visions.travel</a></p>
+                <p><strong>Instagram:</strong> <a href="https://www.instagram.com/crafted.visions.travel/" target="_blank" rel="noopener noreferrer" style="color:white;">@crafted.visions.travel</a></p>
                 <p><strong>Email:</strong> <a href="mailto:crafted.visions@outlook.com" style="color:white; text-decoration:none;">crafted.visions@outlook.com</a></p>
-                <p><strong>Phone:</strong> <span style="color: white;">Alice +216 51639199 | Janina +49 152 38418305</span></p>
+                <p><strong>Phone:</strong> <span style="color:white;">Alice +216 51639199 | Janina +49 152 38418305</span></p>
             </div>
         </div>
     </footer>
 
     <script src="js/script.js"></script>
+    <script>
+        function handleNL() {
+            const e = document.getElementById('nl-email');
+            if (!e.value || !e.value.includes('@')) { alert('Please enter a valid email.'); return; }
+            alert('Thank you! We\'ll keep you posted on next dates.');
+        }
+    </script>
 </body>
 </html>
-
