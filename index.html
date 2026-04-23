@@ -9,6 +9,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="images/opt/hero-bg.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="images/collage_1.jpeg">
+    <link rel="preload" as="image" href="images/collage_2.jpeg">
+    <link rel="preload" as="image" href="images/collage_3.PNG">
+    <link rel="preload" as="image" href="images/collage_4.jpg">
+    <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
     <meta property="og:title" content="CRAFTED VISIONS TRAVEL | Creative Artisan Weekend">
     <meta property="og:description" content="An intimate creative experience in Tunis, connecting you directly with master artisans.">
     <meta property="og:image" content="https://craftedvisionstravel.com/images/opt/hero-bg.webp">
@@ -297,10 +302,10 @@
 
     <!-- COLLAGE from workshop photos -->
     <div class="collage-strip">
-        <div><img src="images/collage_1.jpeg" alt="Ceramics workshop" loading="lazy"></div>
-        <div><img src="images/collage_2.jpeg" alt="Weaving workshop" loading="lazy"></div>
-        <div><img src="images/collage_3.PNG" alt="Calligraphy workshop" loading="lazy"></div>
-        <div><img src="images/collage_4.jpg" alt="Bookbinding workshop" loading="lazy"></div>
+        <div><img src="images/collage_1.jpeg" alt="Ceramics workshop" loading="eager" fetchpriority="high"></div>
+        <div><img src="images/collage_2.jpeg" alt="Weaving workshop" loading="eager"></div>
+        <div><img src="images/collage_3.PNG" alt="Calligraphy workshop" loading="eager"></div>
+        <div><img src="images/collage_4.jpg" alt="Bookbinding workshop" loading="eager"></div>
     </div>
 
     <section class="about" id="about">
@@ -388,8 +393,8 @@
             <p class="disclaimer">A first glimpse of what participants experienced during our first workshops.</p>
 
             <div class="photo-grid-stories">
-                <div><img src="images/pg_1.jpg" alt="Workshop participant" loading="lazy"></div>
-                <div><img src="images/pg_2.jpeg" alt="Bookbinding session" loading="lazy"></div>
+                <div><img src="images/pg_1.jpg" alt="Workshop participant" loading="eager"></div>
+                <div><img src="images/pg_2.jpeg" alt="Bookbinding session" loading="eager"></div>
                 <div><img src="images/pg_3.jpeg" alt="Calligraphy session" loading="lazy"></div>
                 <div><img src="images/pg_4.jpeg" alt="Medina tour" loading="lazy"></div>
                 <div><img src="images/pg_5.jpg" alt="Group photo" loading="lazy"></div>
@@ -463,12 +468,15 @@
     <section class="newsletter-section" id="newsletter">
         <div class="container reveal">
             <h2 style="color:var(--accent-color); margin-bottom:1rem; font-family:var(--font-heading); letter-spacing:0.2em;">STAY IN THE LOOP</h2>
-            <p style="color:#aaa; font-size:0.9rem; max-width:480px; margin:0 auto 2.5rem auto;">Be the first to hear about new workshops - spots are limited</p>
-            <!-- Replace with your Mailchimp form action URL -->
-            <div class="newsletter-form">
-                <input type="email" id="nl-email" placeholder="Your email address">
-                <button onclick="handleNL()">Sign up</button>
-            </div>
+            <p style="color:#aaa; font-size:0.9rem; max-width:480px; margin:0 auto 2rem auto;">Be the first to hear about new workshops - spots are limited</p>
+            <form action="https://outlook.us13.list-manage.com/subscribe/post?u=329d7bb0d19143d6361e97af9&amp;id=1495d74d12&amp;f_id=008bc3e1f0" method="post" target="_blank" class="newsletter-form">
+                <input type="email" name="EMAIL" placeholder="Your email address" required>
+                <!-- Bot protection - do not remove -->
+                <div aria-hidden="true" style="position:absolute; left:-5000px;">
+                    <input type="text" name="b_329d7bb0d19143d6361e97af9_1495d74d12" tabindex="-1" value="">
+                </div>
+                <button type="submit">Sign up</button>
+            </form>
             <p style="color:#555; font-size:0.75rem;">We respect your privacy. Unsubscribe anytime.</p>
         </div>
     </section>
@@ -486,12 +494,5 @@
     </footer>
 
     <script src="js/script.js"></script>
-    <script>
-        function handleNL() {
-            const e = document.getElementById('nl-email');
-            if (!e.value || !e.value.includes('@')) { alert('Please enter a valid email.'); return; }
-            alert('Thank you! We\'ll keep you posted on next dates.');
-        }
-    </script>
 </body>
 </html>
