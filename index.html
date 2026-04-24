@@ -612,7 +612,7 @@
         <div class="container reveal">
             <h2 style="color:var(--accent-color); margin-bottom:1rem; font-family:var(--font-heading); letter-spacing:0.2em;">STAY IN THE LOOP</h2>
             <p style="color:#aaa; font-size:0.9rem; max-width:480px; margin:0 auto 2rem auto;">Get next dates and new workshops before they're announced publicly. No spam - just what matters.</p>
-            <form action="https://outlook.us13.list-manage.com/subscribe/post?u=329d7bb0d19143d6361e97af9&amp;id=1495d74d12&amp;f_id=0089c3e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate newsletter-form" target="_self" novalidate="">
+            <form action="https://outlook.us13.list-manage.com/subscribe/post-json?u=329d7bb0d19143d6361e97af9&amp;id=1495d74d12&amp;f_id=0089c3e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate newsletter-form" novalidate="">
                 <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Your email address" required="" value="">
                 <!-- Bot protection - do not remove -->
                 <div aria-hidden="true" style="position:absolute; left:-5000px;">
@@ -623,6 +623,40 @@
             <p style="color:#555; font-size:0.75rem;">We respect your privacy. Unsubscribe anytime.</p>
         </div>
     </section>
+
+    <!-- Thank You Popup -->
+    <div id="mc-popup-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center;">
+        <div style="background:#fff; padding:2.5rem 2rem; max-width:400px; width:90%; text-align:center; border-radius:4px; position:relative;">
+            <button onclick="document.getElementById('mc-popup-overlay').style.display='none'" style="position:absolute; top:1rem; right:1rem; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#aaa;">✕</button>
+            <p style="font-family:'Montserrat',sans-serif; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:#aaa; margin-bottom:1rem;">Thank you</p>
+            <h3 style="font-family:'Montserrat',sans-serif; font-size:1.1rem; color:#222; margin-bottom:1rem;">Almost there!</h3>
+            <p style="font-size:0.9rem; color:#555; line-height:1.6;">Please check your inbox and click the confirmation link to complete your signup.</p>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        var form = document.getElementById('mc-embedded-subscribe-form');
+        if (!form) return;
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var email = document.getElementById('mce-EMAIL').value;
+            if (!email) return;
+            var url = form.action + '&EMAIL=' + encodeURIComponent(email) +
+                      '&b_329d7bb0d19143d6361e97af9_1495d74d12=&c=mcCallback';
+            var script = document.createElement('script');
+            window.mcCallback = function(data) {
+                var overlay = document.getElementById('mc-popup-overlay');
+                overlay.style.display = 'flex';
+                if (data.result === 'success') {
+                    form.reset();
+                }
+            };
+            script.src = url;
+            document.body.appendChild(script);
+        });
+    })();
+    </script>
 
     <footer id="contact">
         <div class="container reveal">
