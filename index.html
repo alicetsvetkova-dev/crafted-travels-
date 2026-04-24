@@ -313,7 +313,8 @@
                 scroll-behavior: smooth;
                 grid-template-columns: unset;
                 grid-template-rows: unset;
-                height: 80vw;
+                height: auto;
+                aspect-ratio: 4 / 5;
                 gap: 0;
                 scrollbar-width: none;
             }
@@ -322,15 +323,16 @@
                 flex: 0 0 100%;
                 scroll-snap-align: start;
                 grid-row: unset !important;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
                 overflow: hidden;
-                height: 80vw;
             }
             .collage-strip img {
                 width: 100%;
                 height: 100%;
                 object-fit: contain;
-                object-position: center center;
-                background-color: var(--bg-color);
             }
             #collage-dots { display: flex; }
 
@@ -343,7 +345,8 @@
                 scroll-behavior: smooth;
                 grid-template-columns: unset;
                 grid-template-rows: unset;
-                height: 80vw;
+                height: auto;
+                aspect-ratio: 4 / 5;
                 gap: 0;
                 margin-bottom: 0.75rem;
                 scrollbar-width: none;
@@ -353,12 +356,16 @@
                 flex: 0 0 100%;
                 scroll-snap-align: start;
                 grid-row: unset !important;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
                 overflow: hidden;
-                height: 80vw;
             }
             .photo-grid-stories img {
-                width: 100%; height: 100%;
-                object-fit: cover;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
             }
             #stories-dots { display: flex; margin-bottom: 2rem; }
 
@@ -437,7 +444,6 @@
         </div>
     </section>
 
-    <!-- COLLAGE from workshop photos -->
     <div class="collage-strip" id="collage-carousel">
         <div><img src="images/collage_1.webp" alt="Ceramics workshop" loading="eager" fetchpriority="high"></div>
         <div><img src="images/collage_2.webp" alt="Weaving workshop" loading="eager"></div>
@@ -464,7 +470,6 @@
         </div>
     </section>
 
-    <!-- PROGRAM -->
     <section class="program" id="program">
         <div class="container reveal">
             <h2 class="section-title">THE PROGRAM</h2>
@@ -526,7 +531,6 @@
 
     <section class="full-width-image reveal" style="background-image: url('images/opt/authentic-details.webp');"></section>
 
-    <!-- STORIES -->
     <section class="concept" id="stories">
         <div class="container reveal">
             <h2 class="section-title">FROM OUR MARCH EDITION</h2>
@@ -560,7 +564,6 @@
         </div>
     </section>
 
-    <!-- PRICING -->
     <section class="pricing" id="pricing">
         <div class="container reveal">
             <h2 class="section-title">YOUR EXPERIENCE AWAITS</h2>
@@ -572,14 +575,6 @@
                     Book now
                 </strong>
             </p>
-            <!--
-                HOW BOOKING WORKS:
-                Two Stripe links cover all workshops:
-                - Standard (49€): one Stripe checkout with a dropdown to select the workshop
-                - Community (39€): same setup, separate link for Tunisians living & working in Tunisia
-                Replace STRIPE_STANDARD_LINK and STRIPE_COMMUNITY_LINK below with your actual Stripe URLs.
-                In Stripe, set up a Payment Link with a "Select workshop" dropdown as a custom field.
-            -->
             <div class="booking-options">
                 <a href="STRIPE_STANDARD_LINK" target="_blank" class="booking-card booking-card--featured">
                     <p class="booking-card__label">&nbsp;</p>
@@ -607,14 +602,12 @@
         </div>
     </section>
 
-    <!-- NEWSLETTER -->
     <section class="newsletter-section" id="newsletter">
         <div class="container reveal">
             <h2 style="color:var(--accent-color); margin-bottom:1rem; font-family:var(--font-heading); letter-spacing:0.2em;">STAY IN THE LOOP</h2>
             <p style="color:#aaa; font-size:0.9rem; max-width:480px; margin:0 auto 2rem auto;">Get next dates and new workshops before they're announced publicly. No spam - just what matters.</p>
             <form action="https://outlook.us13.list-manage.com/subscribe/post?u=329d7bb0d19143d6361e97af9&amp;id=1495d74d12&amp;f_id=0089c3e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate newsletter-form" target="_self" novalidate="">
                 <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Your email address" required="" value="">
-                <!-- Bot protection - do not remove -->
                 <div aria-hidden="true" style="position:absolute; left:-5000px;">
                     <input type="text" name="b_329d7bb0d19143d6361e97af9_1495d74d12" tabindex="-1" value="">
                 </div>
