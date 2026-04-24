@@ -311,7 +311,9 @@
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
                 scroll-behavior: smooth;
-                height: 72vw;
+                grid-template-columns: unset;
+                grid-template-rows: unset;
+                height: 80vw;
                 gap: 0;
                 scrollbar-width: none;
             }
@@ -319,15 +321,13 @@
             .collage-strip > div {
                 flex: 0 0 100%;
                 scroll-snap-align: start;
+                grid-row: unset !important;
                 overflow: hidden;
-                height: 72vw;
+                height: 80vw;
             }
             .collage-strip img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-                object-position: center center;
-                display: block;
+                width: 100%; height: 100%;
+                object-fit: cover;
             }
             #collage-dots { display: flex; }
 
