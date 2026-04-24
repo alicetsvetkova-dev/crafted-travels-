@@ -306,10 +306,8 @@
 
             /* Collage carousel */
             .collage-strip {
-                display: flex !important;
-                overflow: auto !important;
-                overflow-x: auto !important;
-                overflow-y: hidden !important;
+                display: flex;
+                overflow-x: auto;
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
                 scroll-behavior: smooth;
@@ -321,19 +319,15 @@
             }
             .collage-strip::-webkit-scrollbar { display: none; }
             .collage-strip > div {
-                flex: 0 0 100% !important;
-                width: 100vw;
-                min-width: 100%;
+                flex: 0 0 100%;
                 scroll-snap-align: start;
                 grid-row: unset !important;
                 overflow: hidden;
                 height: 80vw;
             }
             .collage-strip img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-                display: block;
+                width: 100%; height: 100%;
+                object-fit: cover;
             }
             #collage-dots { display: flex; }
 
