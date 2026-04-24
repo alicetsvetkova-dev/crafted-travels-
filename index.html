@@ -307,7 +307,6 @@
             /* Collage carousel */
             .collage-strip {
                 display: flex;
-                overflow: visible;
                 overflow-x: auto;
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
@@ -329,6 +328,7 @@
             .collage-strip img {
                 width: 100%; height: 100%;
                 object-fit: cover;
+                object-position: center top;
             }
             #collage-dots { display: flex; }
 
