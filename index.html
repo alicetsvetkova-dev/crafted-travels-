@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRAFTED VISIONS TRAVEL | Creative Artisan Workshops</title>
+    <title>CRAFTED VISIONS TRAVEL | Creative Artisan Experience</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -416,7 +416,7 @@
             <div class="logo-block">
                 <h1>C R A F T E D<br>V I S I O N S</h1>
             </div>
-            <h2>CREATIVE ARTISAN WORKSHOPS</h2>
+            <h2>CREATIVE ARTISAN EXPERIENCE</h2>
             <p class="dates" style="margin-bottom:0;">13-17 May 2026, Tunis</p>
             <p class="dates">Limited spots available</p>
             <a href="#pricing" class="btn" style="margin-bottom:1.5rem;">Book now</a>
@@ -484,7 +484,7 @@
                         <h4>Friday - 15.05.</h4>
                         <p class="day-card__time">10:00 - 13:00</p>
                         <p class="day-card__workshop">Calligraphy Workshop</p>
-                        <p class="day-card__desc">Discover the meditative rhythm of Arabic calligraphy in a beautiful creative space.</p>
+                        <p class="day-card__desc">Discover the meditative rhythm of Arabic calligraphy in a beautiful creative space, followed by a walk through Sidi Bou Said.</p>
                     </div>
                     <div class="day-card">
                         <img src="images/book-binding.webp" alt="Bookbinding and Medina Tour" class="card-img" loading="lazy" decoding="async">
@@ -513,7 +513,7 @@
                         <li>Small group - max 6 participants</li>
                         <li>Take home your own creation</li>
                         <li>Materials, snacks and drinks included</li>
-                        <li>Selected ateliers in Tunis - meeting point shared after reservation</li>
+                        <li>Selected ateliers in Tunis - meeting point shared upon booking</li>
                         <li>Secure booking - confirmation within 24h</li>
                         <li>Limited spots per session</li>
                     </ul>
@@ -612,7 +612,9 @@
         <div class="container reveal">
             <h2 style="color:var(--accent-color); margin-bottom:1rem; font-family:var(--font-heading); letter-spacing:0.2em;">STAY IN THE LOOP</h2>
             <p style="color:#aaa; font-size:0.9rem; max-width:480px; margin:0 auto 2rem auto;">Get next dates and new workshops before they're announced publicly. No spam - just what matters.</p>
-            <form action="https://outlook.us13.list-manage.com/subscribe/post?u=329d7bb0d19143d6361e97af9&amp;id=1495d74d12&amp;f_id=0089c3e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate newsletter-form" target="_self" novalidate="">
+            <!-- Hidden iframe: Mailchimp response loads here, not the main page -->
+            <iframe name="mc-hidden-frame" style="display:none;" aria-hidden="true"></iframe>
+            <form action="https://outlook.us13.list-manage.com/subscribe/post?u=329d7bb0d19143d6361e97af9&amp;id=1495d74d12&amp;f_id=0089c3e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate newsletter-form" target="mc-hidden-frame" novalidate="">
                 <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Your email address" required="" value="">
                 <!-- Bot protection - do not remove -->
                 <div aria-hidden="true" style="position:absolute; left:-5000px;">
@@ -623,6 +625,33 @@
             <p style="color:#555; font-size:0.75rem;">We respect your privacy. Unsubscribe anytime.</p>
         </div>
     </section>
+
+    <!-- Thank You Popup -->
+    <div id="mc-popup-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center;">
+        <div style="background:#fff; padding:2.5rem 2rem; max-width:400px; width:90%; text-align:center; border-radius:4px; position:relative;">
+            <button onclick="document.getElementById('mc-popup-overlay').style.display='none'" style="position:absolute; top:1rem; right:1rem; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#aaa;">✕</button>
+            <p style="font-family:'Montserrat',sans-serif; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:#aaa; margin-bottom:1rem;">Thank you</p>
+            <h3 style="font-family:'Montserrat',sans-serif; font-size:1.1rem; color:#222; margin-bottom:1rem;">Almost there!</h3>
+            <p style="font-size:0.9rem; color:#555; line-height:1.6;">Please check your inbox and click the confirmation link to complete your signup.</p>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        var form = document.getElementById('mc-embedded-subscribe-form');
+        if (!form) return;
+        form.addEventListener('submit', function() {
+            var email = document.getElementById('mce-EMAIL').value;
+            if (!email) return;
+            // Show popup after short delay to let Mailchimp receive the submission
+            setTimeout(function() {
+                var overlay = document.getElementById('mc-popup-overlay');
+                overlay.style.display = 'flex';
+                form.reset();
+            }, 800);
+        });
+    })();
+    </script>
 
     <footer id="contact">
         <div class="container reveal">
