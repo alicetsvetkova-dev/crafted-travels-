@@ -311,24 +311,22 @@
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
                 scroll-behavior: smooth;
-                height: auto;
+                height: 72vw;
                 gap: 0;
                 scrollbar-width: none;
-                background: #f5f2ee;
             }
             .collage-strip::-webkit-scrollbar { display: none; }
             .collage-strip > div {
                 flex: 0 0 100%;
                 scroll-snap-align: start;
-                overflow: visible;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                overflow: hidden;
+                height: 72vw;
             }
             .collage-strip img {
                 width: 100%;
-                height: auto;
+                height: 100%;
                 object-fit: contain;
+                object-position: center center;
                 display: block;
             }
             #collage-dots { display: flex; }
