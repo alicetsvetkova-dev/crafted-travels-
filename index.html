@@ -241,20 +241,147 @@
         }
         .newsletter-form button:hover { opacity: 0.85; }
 
+        /* ─── Hamburger button ─── */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+        .nav-hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-color);
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+        .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* ─── Carousel dots ─── */
+        .carousel-dots {
+            display: none;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 0 4px;
+        }
+        .carousel-dots .dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: #ccc;
+            transition: background 0.3s;
+        }
+        .carousel-dots .dot.active { background: var(--accent-color); }
+
         @media (max-width: 700px) {
+            /* Nav mobile */
+            .nav-hamburger { display: flex; }
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0; left: 0;
+                width: 100%; height: 100vh;
+                background: rgba(250,248,244,0.98);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                z-index: 1000;
+            }
+            .nav-links.open { display: flex; }
+            .nav-link-item {
+                font-family: var(--font-heading);
+                font-size: 1.1rem;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                color: var(--text-color);
+                text-decoration: none;
+            }
+
+            /* Collage carousel */
             .collage-strip {
-                grid-template-columns: 1fr 1fr;
-                height: 35vh;
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scroll-behavior: smooth;
+                height: 75vw;
+                gap: 0;
+                scrollbar-width: none;
             }
-            .collage-strip > div:nth-child(3),
-            .collage-strip > div:nth-child(4) { display: none; }
+            .collage-strip::-webkit-scrollbar { display: none; }
+            .collage-strip > div {
+                flex: 0 0 100%;
+                scroll-snap-align: start;
+                overflow: hidden;
+            }
+            .collage-strip img {
+                width: 100%; height: 100%;
+                object-fit: cover;
+            }
+            #collage-dots { display: flex; }
+
+            /* Stories photo carousel */
             .photo-grid-stories {
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: 160px 160px 160px;
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scroll-behavior: smooth;
+                grid-template-columns: unset;
+                grid-template-rows: unset;
+                height: 80vw;
+                gap: 0;
+                margin-bottom: 0.75rem;
+                scrollbar-width: none;
             }
-            .photo-grid-stories > div:first-child { grid-row: auto; }
+            .photo-grid-stories::-webkit-scrollbar { display: none; }
+            .photo-grid-stories > div {
+                flex: 0 0 100%;
+                scroll-snap-align: start;
+                grid-row: unset !important;
+                overflow: hidden;
+                height: 80vw;
+            }
+            .photo-grid-stories img {
+                width: 100%; height: 100%;
+                object-fit: cover;
+            }
+            #stories-dots { display: flex; margin-bottom: 2rem; }
+
+            /* Newsletter form stacked */
             .newsletter-form { flex-direction: column; }
+
+            /* Booking cards stacked */
             .booking-options { grid-template-columns: 1fr; max-width: 360px; }
+
+            /* Hero tweaks */
+            .hero-content h1 { font-size: clamp(2rem, 10vw, 3.5rem); }
+            .hero-content h2 { font-size: clamp(0.65rem, 3vw, 0.9rem); }
+
+            /* Full-width image section height */
+            .full-width-image { min-height: 40vw; }
+
+            /* Program inner */
+            .program-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+            .program-checklist { position: static; }
+
+            /* Grid program cards */
+            .grid-program { grid-template-columns: 1fr !important; }
+
+            /* About grid */
+            .about-grid { grid-template-columns: 1fr !important; }
+            .about-image { order: -1; }
+            .about-image img { max-height: 55vw; }
+
+            /* Concept padding */
+            .concept .container { padding-left: 1.25rem; padding-right: 1.25rem; }
         }
     </style>
 </head>
@@ -263,14 +390,17 @@
     <nav class="sticky-nav">
         <div class="nav-container">
             <a href="#home" class="nav-logo">C V .</a>
-            <div class="nav-links">
-                <a href="#concept">Concept</a>
-                <a href="#about">About</a>
-                <a href="#program">Program</a>
-                <a href="#stories">Stories</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#contact">Contact</a>
+            <div class="nav-links" id="nav-links">
+                <a href="#concept" class="nav-link-item">Concept</a>
+                <a href="#about" class="nav-link-item">About</a>
+                <a href="#program" class="nav-link-item">Program</a>
+                <a href="#stories" class="nav-link-item">Stories</a>
+                <a href="#pricing" class="nav-link-item">Pricing</a>
+                <a href="#contact" class="nav-link-item">Contact</a>
             </div>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
@@ -301,11 +431,14 @@
     </section>
 
     <!-- COLLAGE from workshop photos -->
-    <div class="collage-strip">
+    <div class="collage-strip" id="collage-carousel">
         <div><img src="images/collage_1.webp" alt="Ceramics workshop" loading="eager" fetchpriority="high"></div>
         <div><img src="images/collage_2.webp" alt="Weaving workshop" loading="eager"></div>
         <div><img src="images/collage_3.webp" alt="Calligraphy workshop" loading="eager"></div>
         <div><img src="images/collage_4.webp" alt="Bookbinding workshop" loading="eager"></div>
+    </div>
+    <div class="carousel-dots" id="collage-dots" aria-hidden="true">
+        <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
     </div>
 
     <section class="about" id="about">
@@ -392,12 +525,15 @@
             <h2 class="section-title">FROM OUR MARCH EDITION</h2>
             <p class="disclaimer">A first glimpse of what participants experienced during our first workshops.</p>
 
-            <div class="photo-grid-stories">
+            <div class="photo-grid-stories" id="stories-carousel">
                 <div><img src="images/pg_1.webp" alt="Workshop participant" loading="eager"></div>
                 <div><img src="images/pg_2.webp" alt="Bookbinding session" loading="eager"></div>
                 <div><img src="images/pg_3.webp" alt="Calligraphy session" loading="lazy"></div>
                 <div><img src="images/pg_4.webp" alt="Medina tour" loading="lazy"></div>
                 <div><img src="images/pg_5.webp" alt="Group photo" loading="lazy"></div>
+            </div>
+            <div class="carousel-dots" id="stories-dots" aria-hidden="true">
+                <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
             </div>
 
             <div class="grid-program">
@@ -468,7 +604,7 @@
     <section class="newsletter-section" id="newsletter">
         <div class="container reveal">
             <h2 style="color:var(--accent-color); margin-bottom:1rem; font-family:var(--font-heading); letter-spacing:0.2em;">STAY IN THE LOOP</h2>
-            <p style="color:#aaa; font-size:0.9rem; max-width:480px; margin:0 auto 2rem auto;">Be the first to hear about new workshops - spots are limited</p>
+            <p style="color:#aaa; font-size:0.9rem; max-width:480px; margin:0 auto 2rem auto;">Get next dates and new workshops before they're announced publicly. No spam - just what matters.</p>
             <form action="https://outlook.us13.list-manage.com/subscribe/post?u=329d7bb0d19143d6361e97af9&amp;id=1495d74d12&amp;f_id=0089c3e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate newsletter-form" target="_self" novalidate="">
                 <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Your email address" required="" value="">
                 <!-- Bot protection - do not remove -->
@@ -494,5 +630,45 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <script>
+    // ── Hamburger nav ──
+    (function() {
+        var btn = document.getElementById('nav-hamburger');
+        var links = document.getElementById('nav-links');
+        if (!btn || !links) return;
+        btn.addEventListener('click', function() {
+            var open = links.classList.toggle('open');
+            btn.classList.toggle('open', open);
+            btn.setAttribute('aria-expanded', open);
+            document.body.style.overflow = open ? 'hidden' : '';
+        });
+        links.querySelectorAll('a').forEach(function(a) {
+            a.addEventListener('click', function() {
+                links.classList.remove('open');
+                btn.classList.remove('open');
+                btn.setAttribute('aria-expanded', false);
+                document.body.style.overflow = '';
+            });
+        });
+    })();
+
+    // ── Swipeable carousel dot sync ──
+    function initCarouselDots(stripId, dotsId) {
+        var strip = document.getElementById(stripId);
+        var dotsEl = document.getElementById(dotsId);
+        if (!strip || !dotsEl) return;
+        var dots = dotsEl.querySelectorAll('.dot');
+        var items = strip.querySelectorAll('div');
+        var count = items.length;
+        function updateDots() {
+            var idx = Math.round(strip.scrollLeft / strip.offsetWidth);
+            dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+        }
+        strip.addEventListener('scroll', updateDots, { passive: true });
+        // Touch swipe already handled by scroll-snap; dots sync on scroll
+    }
+    initCarouselDots('collage-carousel', 'collage-dots');
+    initCarouselDots('stories-carousel', 'stories-dots');
+    </script>
 </body>
 </html>
