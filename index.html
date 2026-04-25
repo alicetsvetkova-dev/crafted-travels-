@@ -581,13 +581,13 @@
                 In Stripe, set up a Payment Link with a "Select workshop" dropdown as a custom field.
             -->
             <div class="booking-options">
-                <a href="https://buy.stripe.com/6oU00l9cY0C66ys8II53O08" target="_blank" class="booking-card booking-card--featured">
+                <a href="STRIPE_STANDARD_LINK" target="_blank" class="booking-card booking-card--featured">
                     <p class="booking-card__label">&nbsp;</p>
                     <p class="booking-card__title">Standard</p>
                     <p class="booking-card__price">49 €</p>
                     <p class="booking-card__note">Choose your workshop after clicking.</p>
                 </a>
-                <a href="https://buy.stripe.com/14AfZj74Q70ug926AA53O09" target="_blank" class="booking-card booking-card--community">
+                <a href="STRIPE_COMMUNITY_LINK" target="_blank" class="booking-card booking-card--community">
                     <p class="booking-card__label">For Tunisians living and working in Tunisia</p>
                     <p class="booking-card__title">Community</p>
                     <p class="booking-card__price">39 €</p>
@@ -612,9 +612,7 @@
         <div class="container reveal">
             <h2 style="color:var(--accent-color); margin-bottom:1rem; font-family:var(--font-heading); letter-spacing:0.2em;">STAY IN THE LOOP</h2>
             <p style="color:#aaa; font-size:0.9rem; max-width:480px; margin:0 auto 2rem auto;">Get next dates and new workshops before they're announced publicly. No spam - just what matters.</p>
-            <!-- Hidden iframe: Mailchimp response loads here, not the main page -->
-            <iframe name="mc-hidden-frame" style="display:none;" aria-hidden="true"></iframe>
-            <form action="https://outlook.us13.list-manage.com/subscribe/post?u=329d7bb0d19143d6361e97af9&amp;id=1495d74d12&amp;f_id=0089c3e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate newsletter-form" target="mc-hidden-frame" novalidate="">        
+            <form id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate newsletter-form" novalidate="">
                 <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Your email address" required="" value="">
                 <!-- Bot protection - do not remove -->
                 <div aria-hidden="true" style="position:absolute; left:-5000px;">
@@ -622,6 +620,7 @@
                 </div>
                 <button type="submit" id="mc-embedded-subscribe">Sign up</button>
             </form>
+            <p id="mc-form-message" style="color:#aaa; font-size:0.8rem; margin-top:1rem; min-height:1.2rem;" aria-live="polite"></p>
             <p style="color:#555; font-size:0.75rem;">We respect your privacy. Unsubscribe anytime.</p>
         </div>
     </section>
@@ -639,16 +638,66 @@
     <script>
     (function() {
         var form = document.getElementById('mc-embedded-subscribe-form');
+        var emailField = document.getElementById('mce-EMAIL');
+        var msg = document.getElementById('mc-form-message');
+        var submitBtn = document.getElementById('mc-embedded-subscribe');
         if (!form) return;
-        form.addEventListener('submit', function() {
-            var email = document.getElementById('mce-EMAIL').value;
-            if (!email) return;
-            // Show popup after short delay to let Mailchimp receive the submission
-            setTimeout(function() {
-                var overlay = document.getElementById('mc-popup-overlay');
-                overlay.style.display = 'flex';
-                form.reset();
-            }, 800);
+
+        // JSONP endpoint — note /subscribe/post-json (not /post) and &c=? for callback
+        var MC_URL = 'https://outlook.us13.list-manage.com/subscribe/post-json?u=329d7bb0d19143d6361e97af9&id=1495d74d12&f_id=0089c3e1f0';
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // stop the normal form post
+            var email = emailField.value.trim();
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                msg.textContent = 'Please enter a valid email address.';
+                msg.style.color = '#c66';
+                return;
+            }
+
+            msg.textContent = 'Submitting...';
+            msg.style.color = '#aaa';
+            submitBtn.disabled = true;
+
+            // Build the JSONP request
+            var callbackName = 'mcCallback_' + Date.now();
+            var honeypot = form.querySelector('input[name^="b_"]');
+            var url = MC_URL
+                + '&EMAIL=' + encodeURIComponent(email)
+                + '&' + honeypot.name + '=' + encodeURIComponent(honeypot.value)
+                + '&c=' + callbackName;
+
+            var script = document.createElement('script');
+
+            window[callbackName] = function(data) {
+                submitBtn.disabled = false;
+                if (data.result === 'success') {
+                    document.getElementById('mc-popup-overlay').style.display = 'flex';
+                    msg.textContent = '';
+                    form.reset();
+                } else {
+                    // Mailchimp returns HTML in data.msg sometimes; strip tags for safety
+                    var errText = (data.msg || 'Something went wrong. Please try again.').replace(/<[^>]+>/g, '');
+                    // Common case: already subscribed — treat as friendly
+                    if (/already subscribed/i.test(errText)) {
+                        errText = "You're already on the list — check your inbox for previous emails from us.";
+                    }
+                    msg.textContent = errText;
+                    msg.style.color = '#c66';
+                }
+                // cleanup
+                delete window[callbackName];
+                if (script.parentNode) script.parentNode.removeChild(script);
+            };
+
+            script.src = url;
+            script.onerror = function() {
+                submitBtn.disabled = false;
+                msg.textContent = 'Network error. Please try again.';
+                msg.style.color = '#c66';
+                delete window[callbackName];
+            };
+            document.body.appendChild(script);
         });
     })();
     </script>
