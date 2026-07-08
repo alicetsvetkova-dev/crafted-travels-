@@ -899,14 +899,6 @@ a[href^="tel"] {
 .cal__day--avail:hover { border-color: var(--clay); transform: translateY(-1px); }
 .cal__day--selected { background: var(--ink); border-color: var(--ink); color: #fff; }
 .cal__day--selected .cal__dots i { background: #fff !important; }
-.cal__day--today::before {
-    content: "";
-    position: absolute;
-    top: 6px;
-    width: 4px; height: 4px;
-    border-radius: 50%;
-    background: var(--clay);
-}
 .cal__dots { display: flex; gap: 3px; height: 5px; }
 .cal__dots i { width: 5px; height: 5px; border-radius: 50%; display: block; }
 
@@ -1047,6 +1039,7 @@ a[href^="tel"] {
     letter-spacing: 0.2em;
     margin-bottom: 1.5rem;
 }
+.teaser__btn-first { margin-right: 0.75rem; }
 .teaser p {
     max-width: 620px;
     margin: 0 auto 2.5rem auto;
@@ -1155,9 +1148,3 @@ a[href^="tel"] {
     .price-tag__amount { font-size: 1.8rem; }
 }
 
-/* --- PAST WORKSHOP DATES (auto-greyed by calendar.js) --- */
-.cal__day--past {
-    color: #cfc8b9;
-    cursor: default;
-}
-.cal__day--past .cal__dots i { opacity: 0.3; }

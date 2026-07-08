@@ -5,7 +5,8 @@
 
    Time handling is fully automatic, based on the visitor's
    current date & time:
-   - past workshop dates render greyed out and cannot be opened
+   - today and all past dates render greyed out, with no session
+     markers and no way to click, select or open them
    - sessions starting in less than CV_BOOKING.bookingCutoffHours
      (default 24 h) show "Booking closed" and hide the book button
    No edits needed here for schedule changes.
@@ -63,7 +64,9 @@
     }
 
     function firstAvailable() {
+        /* Today can never be booked online, so start looking from tomorrow */
         var d = new Date(today);
+        d.setDate(d.getDate() + 1);
         for (var i = 0; i < 370; i++) {
             var sess = sessionsOn(d);
             for (var j = 0; j < sess.length; j++) {
@@ -100,23 +103,19 @@
 
         for (var day = 1; day <= daysInMonth; day++) {
             var d = new Date(y, m, day);
-            var sess = sessionsOn(d);
-            var isPast = d < today;
+            /* Today and every past date are locked: greyed out like any
+               empty day, no session markers, no click/select/detail access */
+            var isDisabled = d.getTime() <= today.getTime();
+            var sess = isDisabled ? [] : sessionsOn(d);
             var cls = "cal__day";
-            var isToday = d.getTime() === today.getTime();
-            if (isToday) { cls += " cal__day--today"; }
-            var dots = "";
-            if (sess.length) {
-                dots = '<span class="cal__dots">' + sess.map(function (w) {
-                    return '<i class="' + w.colorClass + '"></i>';
-                }).join("") + "</span>";
-            }
-            if (sess.length && isPast) {
-                /* Past workshop date: greyed out, not clickable */
-                cls += " cal__day--past";
-                html += '<div class="' + cls + '" aria-disabled="true">' + day + dots + "</div>";
+
+            if (isDisabled) {
+                html += '<div class="' + cls + '" aria-disabled="true">' + day + "</div>";
             } else if (sess.length) {
                 cls += " cal__day--avail";
+                var dots = '<span class="cal__dots">' + sess.map(function (w) {
+                    return '<i class="' + w.colorClass + '"></i>';
+                }).join("") + "</span>";
                 if (selected && d.getTime() === selected.getTime()) { cls += " cal__day--selected"; }
                 html += '<button type="button" class="' + cls + '" data-date="' + iso(d) + '" aria-label="' +
                     sess.length + " workshop" + (sess.length > 1 ? "s" : "") + " on " + MONTHS[m] + " " + day + '">' +
