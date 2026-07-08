@@ -71,3 +71,55 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', closeAllPopups);
 
 });
+// ── Email links: copy the address as a fallback ──
+// mailto: only works if the visitor's device has a mail app configured.
+// So on every click we also copy the address to the clipboard and show
+// a small confirmation, so the visitor is never left with "nothing happened".
+(function () {
+    var toast;
+    function showToast(msg) {
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.className = 'cv-toast';
+            toast.setAttribute('role', 'status');
+            toast.setAttribute('aria-live', 'polite');
+            document.body.appendChild(toast);
+        }
+        toast.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(toast._timer);
+        toast._timer = setTimeout(function () { toast.classList.remove('show'); }, 4000);
+    }
+    function legacyCopy(text) {
+        return new Promise(function (resolve, reject) {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            var ok = false;
+            try { ok = document.execCommand('copy'); } catch (e) {}
+            document.body.removeChild(ta);
+            ok ? resolve() : reject();
+        });
+    }
+    function copyText(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            return navigator.clipboard.writeText(text).catch(function () {
+                return legacyCopy(text);
+            });
+        }
+        return legacyCopy(text);
+    }
+    document.addEventListener('click', function (e) {
+        var link = e.target && e.target.closest ? e.target.closest('a[href^="mailto:"]') : null;
+        if (!link) { return; }
+        var address = decodeURIComponent(link.getAttribute('href').slice(7).split('?')[0]);
+        copyText(address).then(function () {
+            showToast('Email address copied: ' + address + '. If no email app opened, just paste it into your email.');
+        }).catch(function () {
+            showToast('Write to us at: ' + address);
+        });
+    });
+})();

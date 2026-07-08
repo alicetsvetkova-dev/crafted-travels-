@@ -1148,3 +1148,23 @@ a[href^="tel"] {
     .price-tag__amount { font-size: 1.8rem; }
 }
 
+
+/* --- EMAIL-COPY TOAST --- */
+.cv-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%) translateY(10px);
+    background: var(--ink);
+    color: #fff;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    padding: 0.9rem 1.25rem;
+    max-width: min(92vw, 420px);
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 2000;
+}
+.cv-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
