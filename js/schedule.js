@@ -42,13 +42,13 @@ var CV_BOOKING = {
             name: "Ceramics Workshop",
             colorClass: "c-ceramics",
             weekdays: [3, 6], /* Wednesday & Saturday */
-            start: "14:00",
-            end: "18:00",
+            start: "10:00",
+            end: "13:00",
             price: "49 €",
             image: "images/opt/atelier-poterie.webp",
             desc: "Shape clay with your hands and bring home a piece you made yourself, guided by a master ceramicist.",
             facts: [
-                "4 hours · working pottery atelier in Tunis",
+                "3 hours · working pottery atelier in Tunis",
                 "Small group · max 6 participants",
                 "All materials, snacks & drinks included",
                 "No experience needed · take home your creation"
@@ -102,8 +102,8 @@ var CV_BOOKING = {
             name: "Guided Medina Tour",
             colorClass: "c-medina",
             weekdays: [0], /* Sunday */
-            start: "15:00",
-            end: "16:30",
+            start: "10:00",
+            end: "11:30",
             price: "49 €",
             image: "images/opt/medina-gate.jpg",
             desc: "Explore the Medina through the eyes of someone who truly knows it: hidden corners, living craftsmanship, stories off the tourist trail.",
