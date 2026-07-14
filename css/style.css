@@ -1087,7 +1087,7 @@ a[href^="tel"] {
 
 /* --- NAV LOGO (wordmark, colors from the 2026 rebuild) --- */
 .nav-logo { color: var(--ink); }
-.nav-logo span { color: var(--clay); }
+.nav-logo span { color: var(--ink); }
 
 /* --- BOOKED SPOTS INDICATOR --- */
 .sess__spots {
