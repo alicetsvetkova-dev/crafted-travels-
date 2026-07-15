@@ -61,9 +61,9 @@ var CV_BOOKING = {
             id: "bookbinding",
             name: "Bookbinding Workshop",
             colorClass: "c-bookbinding",
-            weekdays: [4, 6], /* Thursday & Saturday */
-            start: "10:00",
-            end: "13:00",
+            weekdays: [4, 5, 6], /* Thursday, Friday & Saturday */
+            start: "15:00",
+            end: "18:00",
             price: "49 €",
             image: "images/book-binding.webp",
             desc: "Learn the ancient art of hand-binding from one of the last bookbinders in Tunis. Leave with a book you made yourself.",
@@ -81,7 +81,7 @@ var CV_BOOKING = {
             id: "calligraphy",
             name: "Calligraphy Workshop",
             colorClass: "c-calligraphy",
-            weekdays: [5, 0], /* Friday & Sunday */
+            weekdays: [5, 6, 0], /* Friday, Saturday & Sunday */
             start: "10:00",
             end: "13:00",
             price: "49 €",
