@@ -102,8 +102,8 @@ var CV_BOOKING = {
             name: "Guided Medina Tour",
             colorClass: "c-medina",
             weekdays: [0], /* Sunday */
-            start: "10:00",
-            end: "11:30",
+            start: "09:00",
+            end: "10:30",
             price: "49 €",
             image: "images/opt/medina-gate.jpg",
             desc: "Explore the Medina through the eyes of someone who truly knows it: hidden corners, living craftsmanship, stories off the tourist trail.",
