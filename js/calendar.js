@@ -217,7 +217,7 @@
                         (CV_BOOKING.bookingCutoffHours || 24) + '&nbsp;hours before a session. ' +
                         '<a href="https://wa.me/' + CV_BOOKING.whatsapp + '?text=' + waLate + '" target="_blank" rel="noopener">Message us on WhatsApp</a> for last-minute availability.</div>';
                 } else {
-                    html += '<a class="sess__book" target="_blank" rel="noopener" href="' + CV_BOOKING.stripeUrl + '">Book ' +
+                    html += '<a class="sess__book" target="_blank" rel="noopener" href="' + (w.stripeUrl || CV_BOOKING.stripeUrl) + '">Book ' +
                         w.name + " · " + w.price + "</a>";
                     html += '<a class="sess__community" target="_blank" rel="noopener" href="' + CV_BOOKING.communityUrl + '">' +
                         CV_BOOKING.communityLabel + "</a>";

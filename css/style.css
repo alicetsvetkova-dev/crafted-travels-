@@ -1084,6 +1084,13 @@ a[href^="tel"] {
     line-height: 1;
     color: var(--clay);
 }
+.price-tag__note {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.74rem;
+    color: #6b6459;
+    margin-top: 0.55rem;
+}
 
 /* --- NAV LOGO (wordmark, colors from the 2026 rebuild) --- */
 .nav-logo { color: var(--ink); }
