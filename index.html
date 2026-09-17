@@ -155,6 +155,10 @@
             max-width: 700px;
             margin: 0 auto 3rem auto;
         }
+        .booking-options--single {
+            grid-template-columns: 1fr;
+            max-width: 360px;
+        }
         .booking-card {
             background-color: #fff;
             border: 1px solid #e0e0e0;
@@ -482,7 +486,7 @@
                     <div class="day-card">
                         <img src="images/opt/medina-gate.jpg" alt="Guided Medina Tour" class="card-img" loading="lazy" decoding="async">
                         <h4>Guided Medina Tour</h4>
-                        <p class="day-card__time">Every Sunday</p>
+                        <p class="day-card__time">Every Saturday &amp; Sunday</p>
                         <p class="day-card__workshop">9:00 - 10:30</p>
                         <p class="day-card__desc">Explore the Medina through the eyes of someone who truly knows it - hidden corners, living craftsmanship, stories off the tourist trail.</p>
                     </div>
@@ -608,19 +612,23 @@
                 Replace STRIPE_STANDARD_LINK and STRIPE_COMMUNITY_LINK below with your actual Stripe URLs.
                 In Stripe, set up a Payment Link with a "Select workshop" dropdown as a custom field.
             -->
-            <div class="booking-options">
+            <div class="booking-options booking-options--single">
                 <a href="https://buy.stripe.com/6oU00l9cY0C66ys8II53O08" target="_blank" class="booking-card booking-card--featured">
                     <p class="booking-card__label">&nbsp;</p>
                     <p class="booking-card__title">Standard</p>
                     <p class="booking-card__price">49 €</p>
                     <p class="booking-card__note">Choose your workshop after clicking.</p>
                 </a>
+                <!-- COMMUNITY RATE — temporarily hidden. To reactivate: remove the
+                     "booking-options--single" class above, un-comment this card, and set
+                     showCommunityRate to true in js/schedule.js.
                 <a href="https://buy.stripe.com/14AfZj74Q70ug926AA53O09" target="_blank" class="booking-card booking-card--community">
                     <p class="booking-card__label">For Tunisians living and working in Tunisia</p>
                     <p class="booking-card__title">Community</p>
                     <p class="booking-card__price">39 € / 135 TND</p>
                     <p class="booking-card__note">Choose your workshop after clicking.</p>
                 </a>
+                -->
             </div>
 
             <div style="padding:40px 0 20px; text-align:center;">

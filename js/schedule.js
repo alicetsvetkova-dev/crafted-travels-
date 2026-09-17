@@ -29,7 +29,11 @@ var CV_BOOKING = {
     minSpots: 2,
     /* Stripe checkout — the workshop is chosen at checkout */
     stripeUrl: "https://buy.stripe.com/6oU00l9cY0C66ys8II53O08",
-    /* Community rate for Tunisians living & working in Tunisia */
+    /* Community rate for Tunisians living & working in Tunisia.
+       Temporarily hidden from clients. To reactivate: set showCommunityRate
+       to true AND un-comment the Community card in index.html (search
+       "COMMUNITY RATE — temporarily hidden"). Data below is kept intact. */
+    showCommunityRate: false,
     communityUrl: "https://buy.stripe.com/14AfZj74Q70ug926AA53O09",
     communityLabel: "Tunisian community rate · 39 € / 135 TND",
     /* Where "ask for a different workshop" requests go */
@@ -101,7 +105,7 @@ var CV_BOOKING = {
             id: "medina",
             name: "Guided Medina Tour",
             colorClass: "c-medina",
-            weekdays: [0], /* Sunday */
+            weekdays: [6, 0], /* Saturday & Sunday */
             start: "09:00",
             end: "10:30",
             price: "39 €",
@@ -115,7 +119,10 @@ var CV_BOOKING = {
                 "Hidden ateliers & stories off the tourist trail"
             ],
             booked: {},
-            except: [],
+            /* One-off: no Sunday Medina tour on 20 Sep 2026.
+               (Sat 19 Sep is covered automatically by the Saturday recurrence;
+               regular Sat+Sun rhythm continues from 26 Sep onward.) */
+            except: ["2026-09-20"],
             extra: []
         }
     ]

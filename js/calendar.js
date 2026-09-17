@@ -219,8 +219,10 @@
                 } else {
                     html += '<a class="sess__book" target="_blank" rel="noopener" href="' + (w.stripeUrl || CV_BOOKING.stripeUrl) + '">Book ' +
                         w.name + " · " + w.price + "</a>";
-                    html += '<a class="sess__community" target="_blank" rel="noopener" href="' + CV_BOOKING.communityUrl + '">' +
-                        CV_BOOKING.communityLabel + "</a>";
+                    if (CV_BOOKING.showCommunityRate) {
+                        html += '<a class="sess__community" target="_blank" rel="noopener" href="' + CV_BOOKING.communityUrl + '">' +
+                            CV_BOOKING.communityLabel + "</a>";
+                    }
                     html += '<p class="sess__note">Secure Stripe checkout: select your workshop and date (' +
                         dateLabel + ") in the next step. Confirmation within 24&nbsp;h. " +
                         "A session takes place with a minimum of " + minSpots + " participants.</p>";
